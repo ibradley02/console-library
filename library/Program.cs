@@ -7,6 +7,7 @@ namespace library
         static void Main(string[] args)
         {
             Console.Clear();
+            string Input = "";
             Library myLibrary = new Library("My Library");
 
             Book headfirst = new Book("HeadFirst with C#");
@@ -18,9 +19,12 @@ namespace library
             myLibrary.AddBook(mastering);
             myLibrary.AddBook(game);
             myLibrary.AddBook(pro);   
-
-            Console.WriteLine("Welcome to the Library. You may check out any one of the following books:");
+            
+            while(Input != "q"){
+            Console.WriteLine("Welcome to the Library. Type q to leave the library. You may check out any one of the following books:");
             myLibrary.PrintDirectory();
+            Input = Console.ReadLine();
+            }
 
 
         }
