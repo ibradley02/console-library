@@ -6,18 +6,20 @@ namespace library
 {
     public class Library
     {
-        public string Name;
-        public int Num = 0;
+        string Name;
+        int Num = 0;
         int CheckedOut = 0;
-        private Dictionary<string, List<Book>> _books;
+        private List<Book> _books;
         public void AddBook(Book book)
         {
-            _books[book.Title] = new List<Book>();
+            _books.Add(book);
         }
         public void Checkout(Book book)
         {
             if (CheckedOut == 0)
             {
+                book.Available = false;
+                PrintDirectory();
             }
             else
             {
@@ -28,10 +30,11 @@ namespace library
         {
             if (_books.Count >= Result)
             {
-                
+                Checkout(_books[Result]);
             }
-            else if ((_books.Count + 1) == Result)
+            else if ((_books.Count + 1) == Result && CheckedOut != 0)
             {
+                ReturnBook(_books[Result]);
             }
             else
             {
@@ -40,26 +43,34 @@ namespace library
         }
         public void ReturnBook(Book book)
         {
+            if (CheckedOut != 0)
+            {
+                book.Available = true;
+                PrintDirectory();
+            }
 
         }
         public void PrintDirectory()
         {
             foreach (var book in _books)
             {
-                Num++;
-                Console.WriteLine(Num + ". " + book.Key);
-                if (Num == _books.Count)
+                if (book.Available == true)
                 {
                     Num++;
-                    Console.WriteLine(Num + ". Return Book");
-                    Num = 0;
+                    Console.WriteLine(Num + ". " + book.Title);
+                    if (Num == _books.Count)
+                    {
+                        Num++;
+                        Console.WriteLine(Num + ". Return Book");
+                        Num = 0;
+                    }
                 }
             }
         }
         public Library(string name)
         {
             Name = name;
-            _books = new Dictionary<string, List<Book>>();
+            _books = new List<Book>();
         }
     }
 }

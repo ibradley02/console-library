@@ -19,18 +19,21 @@ namespace library
             myLibrary.AddBook(headfirst);
             myLibrary.AddBook(mastering);
             myLibrary.AddBook(game);
-            myLibrary.AddBook(pro);   
-            
-            while(Input != "q"){
-            Console.WriteLine("Welcome to the Library. Type q to leave the library. You may check out any one of the following books:");
-            myLibrary.PrintDirectory();
-            Input = Console.ReadLine();
-            if(int.TryParse(Input, out Result)){
-                myLibrary.SelectBook(Result);
-            }else
+            myLibrary.AddBook(pro);
+
+            while (Input != "q")
             {
-                Console.WriteLine("Please enter a valid input.");
-            }
+                Console.WriteLine("Welcome to the Library. Type q to leave the library. You may check out any one of the following books:");
+                myLibrary.PrintDirectory();
+                Input = Console.ReadLine();
+                if (int.TryParse(Input, out Result))
+                {
+                    myLibrary.SelectBook(Result);
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a valid input.");
+                }
             }
 
 

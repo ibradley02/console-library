@@ -10,7 +10,7 @@ namespace library
         public Book(string title, bool available)
         {
             Title = title;
-            Available = available;
+            Available = true;
 
         }
     }
